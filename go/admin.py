@@ -1,3 +1,18 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Category,Events
+
+class CategoryModel(admin.ModelAdmin):
+    list_display = ['title']
+    ordering = ['title']
+    search_felds = ['title']
+
+
+class EventsModel(admin.ModelAdmin):
+    list_display = ['title',]
+    ordering = ['title']
+    search_felds = ['title']
+
+
+admin.site.register(Events,EventsModel)
+admin.site.register(Category,CategoryModel)
