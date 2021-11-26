@@ -17,7 +17,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from go.views import homePage,exploreMeetings,meetingDetails
+from go.views import homePage,exploreMeetings,meetingDetails,register,login,create
 from django.views.static import serve
 
 urlpatterns = [
@@ -25,4 +25,7 @@ urlpatterns = [
     path('', homePage),
     path('details/', meetingDetails),
     path('explore/', exploreMeetings),
+    path('register/', register),
+    path('login/', login),
+    path('create/', create),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
