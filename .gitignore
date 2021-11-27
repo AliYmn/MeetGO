@@ -96,3 +96,4 @@ ENV/
 db.sqlite3
 .DS_Store
 static/.DS_Store
+media/

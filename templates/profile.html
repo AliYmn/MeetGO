@@ -14,7 +14,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href=" {% static 'vendor/bootstrap/css/bootstrap.min.css' %} " rel="stylesheet">
-    <link href=" {% static 'assets/css/socialbutton.css' %} " rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
@@ -22,8 +21,13 @@
     <link rel="stylesheet" href="{% static 'assets/css/templatemo-edu-meeting.css'%}">
     <link rel="stylesheet" href="{% static 'assets/css/owl.css'%}">
     <link rel="stylesheet" href="{% static 'assets/css/lightbox.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/profile.css'%}">
+
   </head>
+    
 <body>
+
+   
 
   <!-- Sub Header -->
   <div class="sub-header">
@@ -47,7 +51,6 @@
       </div>
     </div>
   </div>
-
   <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky">
       <div class="container">
@@ -62,8 +65,8 @@
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
                           <li><a href="/">Home</a></li>
-                          <li><a href="/register">Register</a></li>
-                          <li><a href="/#contact">Contact Us</a></li> 
+                          <li><a href="/create">Create Event</a></li>
+                          <li><a href="/#contac">Contact Us</a></li> 
                       </ul>        
                       <a class='menu-trigger'>
                           <span>Menu</span>
@@ -75,79 +78,81 @@
       </div>
   </header>
   <!-- ***** Header Area End ***** -->
-
-  <section style="background-image: url({% static 'assets/images/login_bg.jpeg' %});" class="heading-page header-text" id="top">
+  
+  <section class="heading-page header-text meetings-page" id="top" >
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h6 >Wellcome to MeetGO </h6>
-          <h2 style="text-transform:none; " >Amazing events are waiting for you...</h2>
+    <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+        <div class="card-body">
+            <div class="account-settings">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="{{link}}" alt="{{request.user.first_name}}">
+                    </div>
+                    <h5 class="user-name">{{request.user.first_name}} {{request.user.last_name}}</h5>
+                    <h6 class="user-email">{{request.user.email}}</h6>
+                </div>
+                <div class="about">
+                    <h5>About</h5>
+                    <p>{{about}}</p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-
-    <section class="meetings-page " style="padding-top:20px;" id="meetings">
-        <center><div class="card text-black col-md-4" style="border-radius: 25px; margin-right:2%; margin-left:2%;">
-          <div class="card-body p-md-2 ">
-            <div class="row justify-content-center ">
-              <div class="col-12">
-                <p style="padding-bottom:2%; padding-top:2%" class="text-center h5 fw-bold">Login</p>
-                <form action="/login/" method="post" class="mx-1 mx-md-4">{% csrf_token %}
-                  {% if error %}
-                  <div class="alert alert-danger" role="alert">
-                     please fill out the form completely!
-                  </div>
-                  {% endif %}
-
-                  {% if not_user %}
-                  <div class="alert alert-danger" role="alert">
-                    Your email or password wrong!
-                  </div>
-                  {% endif %}
-                  <div class="d-flex flex-row align-items-center">
-                    <i class="fa fa-envelope fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input placeholder="e-mail adress" type="email" name="email" id="email" class="form-control" />
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+        <div class="card-body">
+            <form action="/profile/" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mb-2 text-primary">Personal Details</h6>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input value="{{request.user.first_name}} {{request.user.last_name}}" disabled type="text" class="form-control">
                     </div>
-                  </div>
-
-                  <div style="margin-bottom:5%;" class="d-flex flex-row align-items-center">
-                    <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input placeholder="password" type="password" name="password" id="password" class="form-control" />
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="eMail">Email</label>
+                        <input value="{{request.user.email}}" type="email" class="form-control" disabled>
                     </div>
-                  </div>
-
-                    <a href="#" class="fb btn">
-                      <i class="fa fa-facebook fa-fw"></i> Login with Facebook
-                    </a>
-                    <a href="#" class="twitter btn">
-                      <i class="fa fa-twitter fa-fw"></i> Login with Twitter
-                    </a>
-                    <a href="#" class="google btn"><i class="fa fa-google fa-fw">
-                      </i> Login with Google+
-                    </a>
-                  <hr/>
-                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" class="btn btn-primary btn-lg">Login</button>
-                  </div>
-                </form>
+                </div>
+                <div style="margin-top:2%"  class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label for="phone">About</label>
+                        <textarea rows="5" type="text" class="form-control" id="about" name="about" placeholder="About">{{about}}</textarea>
+                    </div>
+                </div>
+                
+                <center>
+                <div style="margin-top:3%" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="website">Upload Profile</label>
+                        <input type="file" class="form-control" id="file" name="file">
+                    </div>
+                </div>
+                </center>
             </div>
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="text-right">
+                        <br/>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            </center>
-          </div>
-            <div class="col-lg-12">
-              <div class="main-button-red">
-                <a href="/">Back To Home Page</a>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
+    </div>
+    </div>
     </div>
     <div class="footer">
-      <p>Copyright © 2022 MeetGO Co.Ltd. All Rights Reserved. 
+      <p>Copyright © 2022 Edu Meeting Co.Ltd. All Rights Reserved. 
     </div>
   </section>
 

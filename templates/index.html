@@ -58,6 +58,17 @@
                           MeetGO
                       </a>
                       <!-- ***** Logo End ***** -->
+                      {% if request.user %}
+                      <!-- ***** Menu Start ***** -->
+                      <ul class="nav">
+                          <li><a  href="/profile">Profile</a></li>
+                          <li><a  href="/create">Create Event</a></li>
+                          <li><a href="/explore">Meetings</a></li>
+                          <li class=""><a href="#apply">About Us</a></li>
+                          <li class=""><a href="#courses">Popular Meetings</a></li> 
+                          <li class=""><a href="#contact">Contact Us</a></li> 
+                      </ul> 
+                      {% else %}
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
                           <li><a href="/login">Login</a></li>
@@ -66,7 +77,8 @@
                           <li class=""><a href="#apply">About Us</a></li>
                           <li class=""><a href="#courses">Popular Meetings</a></li> 
                           <li class=""><a href="#contact">Contact Us</a></li> 
-                      </ul>        
+                      </ul>     
+                      {% endif %}   
                       <a class='menu-trigger'>
                           <span>Menu</span>
                       </a>

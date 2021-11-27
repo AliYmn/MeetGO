@@ -88,46 +88,80 @@
   </section>
 
     <section class="meetings-page " style="padding-top:20px;" id="meetings">
-        <center><div class="card text-black col-4" style="border-radius: 25px;">
+        <center><div class="card text-black col-md-4" style="border-radius: 25px; margin-right:5%;margin-left:5%;">
           <div class="card-body p-md-2 ">
             <div class="row justify-content-center ">
               <div class="col-12">
                 <p style="padding-bottom:2%; padding-top:2%" class="text-center h5 fw-bold">Sign up</p>
-                <form class="mx-1 mx-md-4">
+                {% if success %}
+                  <div div class="alert alert-success" role="alert">
+                  User successfully created.
+                  </div>
+                {% endif %}
+                {% if notsame %}
+                  <div div class="alert alert-danger" role="alert">
+                  passwords are not the same!
+                  </div>
+                {% endif %}
+                {% if empty %}
+                  <div div class="alert alert-danger" role="alert">
+                  please fill out the form completely!
+                  </div>
+                {% endif %}
+                {% if error %}
+                  <div div class="alert alert-danger" role="alert">
+                  Please Confirm the Contract!
+                  </div>
+                {% endif %}
+                <form action="/register/" method="post" class="mx-1 mx-md-4"> {% csrf_token %}
                   <div class="d-flex flex-row align-items-center">
                     <i class="fa fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input autocomplete="off" placeholder="User Name" type="text" id="username" class="form-control" />
+                      <input autocomplete="off" placeholder="User Name" type="text" name="username" id="username" class="form-control" />
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center">
                     <i class="fa fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input autocomplete="off" placeholder="e-mail adress" type="email" id="email" class="form-control" />
+                      <input autocomplete="off" placeholder="e-mail adress" type="email" name="email" id="email" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center">
+                    <i class="fa fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input autocomplete="off" placeholder="First Name" type="text" name="first_name" id="first_name" class="form-control" />
+                    </div>
+                  </div>
+
+                    <div class="d-flex flex-row align-items-center">
+                    <i class="fa fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input autocomplete="off" placeholder="Last Name" type="text" name="last_name" id="last_name" class="form-control" />
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center">
                     <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input autocomplete="off" placeholder="password" type="password" id="password" class="form-control" />
+                      <input autocomplete="off" placeholder="password" type="password" name="password" id="password" class="form-control" />
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center">
                     <i class="fa fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input autocomplete="off" placeholder="re-password" type="password" id="passwordagain" class="form-control" />
+                      <input autocomplete="off" placeholder="re-password" type="password" name="repassword" id="repassword" class="form-control" />
                     </div>
                   </div>
 
-                  <div style="padding-top:7%; padding-bottom:5%;" class="form-check d-flex justify-content-center">
+                  <div style="padding-top:3%; padding-bottom:5%;" class="form-check d-flex justify-content-center">
                     <input
                       class="form-check-input me-2"
                       type="checkbox"
-                      value=""
-                      id="form2Example3c"
+                      id="check"
+                      name="check"
                     />
                     <label style="margin-top:1%;" class="form-check-label" for="form2Example3">
                       I agree all statements in <a href="#!">Terms of service</a>
@@ -145,7 +179,7 @@
                     </a>
                   <hr/>
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="button" class="btn btn-primary btn-lg">Register</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
                   </div>
                 </form>
             </div>
@@ -161,9 +195,10 @@
         </div>
       </div>
     </div>
-    <div class="footer">
-      <p>Copyright © 2022 MeetGO Co.Ltd. All Rights Reserved. 
-    </div>
+    <hr style="color:white;">
+    <center>
+      <p style="color:white;">Copyright © 2022 MeetGO Co.Ltd. All Rights Reserved. 
+    </center>
   </section>
 
 

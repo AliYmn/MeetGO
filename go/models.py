@@ -2,6 +2,25 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from imagekit.models import ProcessedImageField
+from django.contrib.auth.models import AbstractUser
+
+class Profile(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    # user description
+    description = models.CharField(max_length=500, null=True,
+                                verbose_name="Açıklama",
+                                help_text="Kullanıcı hakkında açıklama")
+    # profile url
+    url = models.CharField(max_length=500, null=True, blank=True)
+
+    start_time = models.DateTimeField(auto_now=False, null=True)
+    modefied_time = models.DateTimeField(auto_now=False, null=True)
+
+    def __str__(self):
+        return self.user.first_name
+
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
 
 class Category(models.Model):
     # Kategori adı
@@ -61,6 +80,7 @@ class Events(models.Model):
 
     start_time = models.DateTimeField(auto_now=False, null=True)
     modefied_time = models.DateTimeField(auto_now=False, null=True)
+    
     class Meta:
         verbose_name = "event"
         verbose_name_plural = "events"
