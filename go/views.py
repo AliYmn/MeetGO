@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from django.shortcuts import redirect
-from .models import Profile
+from .models import Profile,Category,Events
 from django.core.files.storage import FileSystemStorage
 
 def homePage(request):
@@ -76,7 +76,33 @@ def loginUser(request):
     return render(request,'login.html')
 
 def create(request):
-    return render(request,'create.html')
+    category_list = Category.objects.all()
+    if request.method == "POST": 
+        try:
+            title = request.POST.get("title")
+            description = request.POST.get("description")
+            event_type = request.POST.get("event_type")
+            category = request.POST.get("category")
+            address = request.POST.get("address")
+            keywords = request.POST.get("keywords")
+            myfile = request.FILES['file']
+            fs = FileSystemStorage()
+            file_name = fs.save(myfile.name,myfile)
+            url = fs.url(file_name)
+            Events.objects.create(
+                user=request.user,
+                title=title,
+                event_type=event_type,
+                tags=keywords,
+                image = url,
+                category_list = Category.objects.get(title=category),
+                description=description,
+            )
+            return render(request,'create.html',{"category_list":category_list,"success":True})
+        except:
+            return render(request,'create.html',{"category_list":category_list,"error":True})
+    category_list = Category.objects.all()
+    return render(request,'create.html',{"category_list":category_list})
 
 def profile(request):
     if request.method == "POST":

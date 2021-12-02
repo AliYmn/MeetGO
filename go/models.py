@@ -1,8 +1,9 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
-from imagekit.models import ProcessedImageField
+# from imagekit.models import ProcessedImageField
 from django.contrib.auth.models import AbstractUser
+from django.utils.text import slugify
 
 class Profile(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -58,9 +59,13 @@ class Events(models.Model):
 
     # event title
     title = models.CharField(max_length=500,
-                             null=True, unique=True, verbose_name="title",
+                             null=True, unique=False, verbose_name="title",
                              help_text="please write title")
 
+    # event type
+    event_type = models.CharField(max_length=500,
+                             null=True, unique=False, verbose_name="type",
+                             help_text="event type")
     # event tags
     tags = models.CharField(max_length=500, null=True,
                             verbose_name="Keywords",
@@ -69,17 +74,14 @@ class Events(models.Model):
     description = RichTextField()
 
     # event image
-    image = ProcessedImageField(upload_to='staticfiles/uploads/event/',
-                                           format='JPEG',
-                                           options={'quality': 80},verbose_name="Image",
-                                           help_text="Image")
+    image = models.CharField(max_length=500, null=True, blank=True)
 
     # event categories
     category_list = models.ForeignKey(Category, null=True, blank=True,
                                    db_index=True,verbose_name="Categories",on_delete=models.CASCADE)
 
-    start_time = models.DateTimeField(auto_now=False, null=True)
-    modefied_time = models.DateTimeField(auto_now=False, null=True)
+    start_time = models.DateTimeField(auto_now=True, null=True)
+    modefied_time = models.DateTimeField(auto_now=True, null=True)
     
     class Meta:
         verbose_name = "event"
