@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import redirect
 from .models import Profile,Category,Events
 from django.core.files.storage import FileSystemStorage
@@ -125,3 +125,7 @@ def profile(request):
         "about":about,
         "link":link
     })
+
+def logout_user(request):
+    logout(request)
+    return redirect("/")

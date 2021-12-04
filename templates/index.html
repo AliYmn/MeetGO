@@ -58,7 +58,8 @@
                           MeetGO
                       </a>
                       <!-- ***** Logo End ***** -->
-                      {% if request.user %}
+                      
+                      {% if request.user.id%}
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
                           <li><a  href="/profile">Profile</a></li>
@@ -67,6 +68,9 @@
                           <li class=""><a href="#apply">About Us</a></li>
                           <li class=""><a href="#courses">Popular Meetings</a></li> 
                           <li class=""><a href="#contact">Contact Us</a></li> 
+                          {% if request.user != "AnonymousUser" %}
+                          <li class=""><a href="/logout/">Logout</a></li> 
+                          {% endif %}
                       </ul> 
                       {% else %}
                       <!-- ***** Menu Start ***** -->
