@@ -23,8 +23,8 @@ from django.views.static import serve
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homePage),
-    path('details/', meetingDetails),
-    path('explore/', exploreMeetings),
+    path('event/<int:pk>/<str:url>/', meetingDetails),
+    path('explore/', exploreMeetings.as_view()),
     path('register/', register),
     path('login/', loginUser),
     path('create/', create),

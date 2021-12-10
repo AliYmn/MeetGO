@@ -42,7 +42,6 @@ class Category(models.Model):
     modefied_time = models.DateTimeField(auto_now=False, null=True)
 
     def __str__(self):
-        # dönüş değeri
         return self.title
 
     def get_absolute_url(self):
@@ -75,12 +74,17 @@ class Events(models.Model):
 
     # event image
     image = models.CharField(max_length=500, null=True, blank=True)
+    # event address
+    address = models.CharField(max_length=500, null=True, blank=True)
+
+    # event image
+    url = models.CharField(max_length=500, null=True, blank=True)
 
     # event categories
     category_list = models.ForeignKey(Category, null=True, blank=True,
                                    db_index=True,verbose_name="Categories",on_delete=models.CASCADE)
 
-    start_time = models.DateTimeField(auto_now=True, null=True)
+    start_time = models.DateTimeField(auto_now=False, null=True)
     modefied_time = models.DateTimeField(auto_now=True, null=True)
     
     class Meta:

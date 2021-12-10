@@ -4,15 +4,36 @@ from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import redirect
 from .models import Profile,Category,Events
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
+from django.utils.dateparse import parse_datetime
+from django.views.generic import ListView
 
 def homePage(request):
-    return render(request,'index.html')
+    category_list = Category.objects.all()
+    meetings = Events.objects.all().order_by("-start_time")[:2]
+    return render(request,'index.html',{
+        "category_list":category_list,
+        "meetings":meetings,
+    })
 
-def meetingDetails(request):
-    return render(request,'details.html')
+@login_required(login_url='/login/')
+def meetingDetails(request,pk,url):
+    event = Events.objects.get(id=pk,url=url)
+    return render(request,'details.html',{
+        "event":event,
+    })
 
-def exploreMeetings(request):
-    return render(request,'explore.html')
+class exploreMeetings(ListView):
+    model = Events
+    queryset = Events.objects.filter().order_by('-start_time')
+    context_object_name = 'events'
+    template_name = 'explore.html'
+    paginate_by = 6
+
+    def get_context_data(self, **kwargs):
+        context = super(exploreMeetings, self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.all()
+        return context
 
 def register(request):
     # register user
@@ -75,11 +96,13 @@ def loginUser(request):
         return redirect("/")
     return render(request,'login.html')
 
+@login_required(login_url='/login/')
 def create(request):
     category_list = Category.objects.all()
     if request.method == "POST": 
         try:
             title = request.POST.get("title")
+            date = request.POST.get("date")
             description = request.POST.get("description")
             event_type = request.POST.get("event_type")
             category = request.POST.get("category")
@@ -97,6 +120,8 @@ def create(request):
                 image = url,
                 category_list = Category.objects.get(title=category),
                 description=description,
+                start_time=parse_datetime(date),
+                address=address,
             )
             return render(request,'create.html',{"category_list":category_list,"success":True})
         except:
@@ -104,6 +129,7 @@ def create(request):
     category_list = Category.objects.all()
     return render(request,'create.html',{"category_list":category_list})
 
+@login_required(login_url='/login/')
 def profile(request):
     if request.method == "POST":
         try:

@@ -90,7 +90,7 @@
     </div>
   </section>
 
-  <section class="meetings-page" id="meetings">
+  <section style="padding:2%;" class="meetings-page" id="meetings">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -99,179 +99,49 @@
               <div class="filters">
                 <ul>
                   <li data-filter="*"  class="active">All Meetings</li>
-                  <li data-filter=".soon">Soon</li>
-                  <li data-filter=".imp">Important</li>
-                  <li data-filter=".att">Attractive</li>
+                  {% for c in category_list %}
+                  <li data-filter=".{{c.title}}">{{c.title}}</li>
+                  {% endfor %}
                 </ul>
               </div>
             </div>
             <div class="col-lg-12">
               <div class="row grid">
-                <div class="col-lg-4 templatemo-item-col all soon">
+                {% for obj in events %}
+                <div class="col-lg-4 templatemo-item-col all {{obj.category_list.title}}">
                   <div class="meeting-item">
                     <div class="thumb">
                       <div class="price">
-                        <span>$14.00</span>
+                        <span><i class="fa fa-clock-o" aria-hidden="true"></i>{{obj.start_time | date:"H:i" }}</span>
                       </div>
-                      <a href="/details"><img src="{% static 'assets/images/meeting-01.jpg' %}" alt=""></a>
+                      <a href="/event/{{obj.id}}/{{obj.url}}/"><img src="{{obj.image}}" alt=""></a>
                     </div>
                     <div class="down-content">
                       <div class="date">
-                        <h6>Nov <span>12</span></h6>
+                        <h6>{{obj.start_time | date:"D" }}<span>{{obj.start_time | date:"d" }}</span></h6>
                       </div>
-                      <a href="/details"><h4>New Lecturers Meeting</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
+                      <a href="/event/{{obj.url}}"><h4>{{obj.title}}</h4></a>
+                      <p>{{obj.description | truncatechars:20 |safe }}</p>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-4 templatemo-item-col all imp">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$22.00</span>
-                      </div>
-                      <a href="/details"><img src="{% static 'assets/images/meeting-02.jpg' %}" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>14</span></h6>
-                      </div>
-                      <a href="/details"><h4>Online Teaching Techniques</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all soon">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$24.00</span>
-                      </div>
-                      <a href="/details"><img src="{% static 'assets/images/meeting-03.jpg' %}" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>16</span></h6>
-                      </div>
-                      <a href="/details"><h4>Network Teaching Concept</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all att">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$32.00</span>
-                      </div>
-                      <a href="/details"><img src="{% static 'assets/images/meeting-04.jpg' %}" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>18</span></h6>
-                      </div>
-                      <a href="/details"><h4>Online Teaching Tools</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all att">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$34.00</span>
-                      </div>
-                      <a href="/details"><img src="{% static 'assets/images/meeting-02.jpg' %}" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>22</span></h6>
-                      </div>
-                      <a href="/details"><h4>New Teaching Techniques</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all imp">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$45.00</span>
-                      </div>
-                      <a href="/details"><img src="{% static 'assets/images/meeting-03.jpg' %}" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>24</span></h6>
-                      </div>
-                      <a href="/details"><h4>Technology Conference</h4></a>
-                      <p>TemplateMo is the best website<br>when it comes to Free CSS.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all imp att">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$52.00</span>
-                      </div>
-                      <a href="/details"><img src="{% static 'assets/images/meeting-01.jpg' %}" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>27</span></h6>
-                      </div>
-                      <a href="/details"><h4>Online Teaching Techniques</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all soon imp">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$64.00</span>
-                      </div>
-                      <a href="/details"><img src="{% static 'assets/images/meeting-02.jpg' %}" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>28</span></h6>
-                      </div>
-                      <a href="/details"><h4>Instant Lecture Design</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all att soon">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$74.00</span>
-                      </div>
-                      <a href="/details"><img src="{% static 'assets/images/meeting-03.jpg' %}" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>30</span></h6>
-                      </div>
-                      <a href="/details"><h4>Online Social Networking</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
+                {% endfor %}
               </div>
             </div>
+            {% if is_paginated %}
             <div class="col-lg-12">
               <div class="pagination">
                 <ul>
-                  <li><a href="#">1</a></li>
-                  <li class="active"><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                  {% for i in page_obj.paginator.page_range %}
+                  <li><a href="?page={{i}}">{{i}}</a></li>
+                  {% endfor %}    
+                  {% if page_obj.has_next %}
+                  <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+                  {% endif %}
                 </ul>
               </div>
             </div>
+            {% endif %}
           </div>
         </div>
       </div>
