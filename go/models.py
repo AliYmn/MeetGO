@@ -120,3 +120,16 @@ class Subscription(models.Model):
 
     def save(self, *args, **kwargs):
         super(Subscription, self).save(*args, **kwargs)
+
+class Notifications(models.Model):
+    title =  models.CharField(max_length=500, null=True, blank=True)
+    event = models.ForeignKey(Events,on_delete=models.CASCADE)
+    targetuser = models.ForeignKey(User,on_delete=models.CASCADE,related_name="target_user")
+    fromuser = models.ForeignKey(User,on_delete=models.CASCADE,related_name="from_user")
+    start_time = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return  self.title
+
+    def save(self, *args, **kwargs):
+        super(Notifications, self).save(*args, **kwargs)

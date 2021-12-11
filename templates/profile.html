@@ -88,9 +88,15 @@
             <div class="account-settings">
                 <div class="user-profile">
                     <div class="user-avatar">
+                       {% if not link %}
+                       <div class="alert alert-info" role="alert">
+                        Please upload profile photo.
+                      </div>
+                       {% else %}
                         <img src="{{link}}" alt="{{request.user.first_name}}">
+                      {% endif %}
                     </div>
-                    <h5 class="user-name">{{request.user.first_name}} {{request.user.last_name}}</h5>
+                    <h5 class="user-name">{{request.user.first_name}} {{request.user.last_name}} ({{request.user.username}})</h5>
                     <h6 class="user-email">{{request.user.email}}</h6>
                 </div>
                 <div class="about">

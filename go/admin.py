@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category,Events,Profile,Follow,Subscription
+from .models import Category,Events,Profile,Follow,Subscription,Notifications
 
 class CategoryModel(admin.ModelAdmin):
     list_display = ['title']
@@ -19,3 +19,4 @@ admin.site.register(Category,CategoryModel)
 admin.site.register(Profile)
 admin.site.register(Follow)
 admin.site.register(Subscription)
+admin.site.register(Notifications)

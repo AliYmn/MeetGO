@@ -158,7 +158,7 @@
         <form class="needs-validation" action="/create/" method="post" enctype="multipart/form-data">{% csrf_token %}
           {% if success %}
           <div class="alert alert-success" role="alert">
-            The event was created successfully.
+            The event was created successfully. <a href="/event/{{event_id}}/{{event_url}}/">(go your meeting)</a>
           </div>
           {% endif %}
 

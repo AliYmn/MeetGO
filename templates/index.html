@@ -69,6 +69,15 @@
                           <li class=""><a href="#contact">Contact Us</a></li> 
                           {% if request.user != "AnonymousUser" %}
                           <li class=""><a href="/logout/">Logout</a></li> 
+
+                          <a href="/notifications/"  style="background-color:#a12c2f; color:white;" type="button" class="btn position-relative">
+                            Inbox
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                              {{notif_count}}
+                              <span class="visually-hidden">unread messages</span>
+                            </span>
+                          </a>
+
                           {% endif %}
                       </ul> 
                       {% else %}
@@ -128,8 +137,8 @@
                 <img src="{% static 'assets/images/service-icon-01.png'%}" alt="">
               </div>
               <div class="down-content">
-                <h4>Best Education</h4>
-                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+                <h4>Join a Event</h4>
+                <p>Do what you love, meet others who love it, find your community. The rest is history!</p>
               </div>
             </div>
             
@@ -138,8 +147,8 @@
                 <img src="{% static 'assets/images/service-icon-02.png'%}" alt="">
               </div>
               <div class="down-content">
-                <h4>Best Teachers</h4>
-                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+                <h4>Find an Event</h4>
+                <p>Events are happening on just about any topic you can think of, from online gaming and photography to yoga and hiking.</p>
               </div>
             </div>
             
@@ -148,8 +157,9 @@
                 <img src="{% static 'assets/images/service-icon-03.png'%}" alt="">
               </div>
               <div class="down-content">
-                <h4>Best Students</h4>
-                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+                <h4>Start a group</h4>
+                <p>You don’t have to be an expert to gather people together and explore shared interests.
+                </p>
               </div>
             </div>
             
@@ -159,7 +169,7 @@
               </div>
               <div class="down-content">
                 <h4>Online Meeting</h4>
-                <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
+                <p>Dive in! There are so many things to do on Meetup</p>
               </div>
             </div>
             
@@ -237,7 +247,7 @@
             <div class="col-lg-12">
               <div class="item">
                 <h3>Organizer</h3>
-                <p>You are allowed to use this edu meeting CSS template for your school or university or business. You can feel free to modify or edit this layout.</p>
+                <p>Join a group to meet people, make friends, find support, grow a business, and explore your interests. Thousands of events are happening every day, both online and in person!</p>
                 <div class="main-button-red">
                   <div><a href="/register">Join Us Now!</a></div>
               </div>
@@ -246,7 +256,7 @@
             <div class="col-lg-12">
               <div class="item">
                 <h3>New User!</h3>
-                <p>You are not allowed to redistribute the template ZIP file on any other template website. Please contact us for more information.</p>
+                <p>Join a group to meet people, make friends, find support, grow a business, and explore your interests. Thousands of events are happening every day, both online and in person!</p>
                 <div class="main-button-yellow">
                   <div><a href="/register">Join Us Now!</a></div>
               </div>
@@ -265,7 +275,7 @@
                 </div>
                 <div class="accordion-body">
                     <div class="content">
-                        <p>Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir.</p>
+                        <p>This Project has been prepared for the university homework project.</p>
                     </div>
                 </div>
             </article>

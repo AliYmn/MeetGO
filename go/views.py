@@ -2,18 +2,24 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import redirect
-from .models import Profile,Category,Events,Follow,Subscription
+from .models import Profile,Category,Events,Follow,Subscription,Notifications
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 from django.utils.dateparse import parse_datetime
 from django.views.generic import ListView
+from datetime import datetime, timedelta
+from django.utils import timezone
+
 
 def homePage(request):
     category_list = Category.objects.all()
     meetings = Events.objects.all().order_by("-start_time")[:2]
+    one_week_ago = datetime.today() - timedelta(days=7)
+    notif_count = Notifications.objects.filter(targetuser=request.user,start_time__gte=one_week_ago).count()
     return render(request,'index.html',{
         "category_list":category_list,
         "meetings":meetings,
+        "notif_count":notif_count
     })
 
 @login_required(login_url='/login/')
@@ -128,7 +134,7 @@ def create(request):
             fs = FileSystemStorage()
             file_name = fs.save(myfile.name,myfile)
             url = fs.url(file_name)
-            Events.objects.create(
+            event = Events.objects.create(
                 user=request.user,
                 title=title,
                 event_type=event_type,
@@ -139,7 +145,20 @@ def create(request):
                 start_time=parse_datetime(date),
                 address=address,
             )
-            return render(request,'create.html',{"category_list":category_list,"success":True})
+            subs = Subscription.objects.filter(organizer__user__in=[request.user])
+            print('subs: ', subs)
+            for s in subs:
+                Notifications.objects.create(
+                    title="Event Created",
+                    fromuser=request.user,
+                    targetuser=s.user,
+                    event=event
+                )
+            return render(request,'create.html',{"category_list":category_list,
+            "success":True,
+            "event_id":event.id,
+            "event_url":event.url
+            })
         except:
             return render(request,'create.html',{"category_list":category_list,"error":True})
     category_list = Category.objects.all()
@@ -257,3 +276,14 @@ def unsubs(request,pk):
     subs = Subscription.objects.get(user=user)
     subs.organizer.remove(profile)
     return redirect("/event/"+str(event.pk)+"/"+str(event.url)+"/")
+
+@login_required(login_url='/login/')
+def notifications(request):
+    about = Profile.objects.get(user=request.user).description
+    link = Profile.objects.get(user=request.user).url
+    notif = Notifications.objects.filter(targetuser=request.user)
+    return render(request,'notifications.html',{
+        "about":about,
+        "link":link,
+        "notif":notif
+    })

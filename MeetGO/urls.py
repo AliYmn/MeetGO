@@ -17,7 +17,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from go.views import homePage,exploreMeetings,meetingDetails,register,loginUser,create,profile,logout_user,profile_details,followup,unfollow,subup,unsubs
+from go.views import homePage,exploreMeetings,meetingDetails,register,loginUser,create,profile,logout_user,profile_details,followup,unfollow,subup,unsubs,notifications
 from django.views.static import serve
 
 urlpatterns = [
@@ -34,5 +34,6 @@ urlpatterns = [
     path('followup/<int:pk>/',followup),
     path('unfollow/<int:pk>/',unfollow),
     path('subs/<int:pk>/',subup),
-    path('unsubs/<int:pk>/',unsubs)
+    path('unsubs/<int:pk>/',unsubs),
+    path('notifications/',notifications)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
