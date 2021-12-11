@@ -14,8 +14,8 @@ This <b>project</b> is a homework project in a university course.
 
 > Contributors 
 
-* <a href="https://github.com/AliYmn">Ali Yaman</a> 
-* <a href="https://github.com/aysenurdemirkaya">Ayşe Nur Demirkaya</a>
+* <a href="https://github.com/AliYmn">Ali Yaman</a> (<a href="https://www.linkedin.com/in/aliyaman/">Linkedin</a>)
+* <a href="https://github.com/aysenurdemirkaya">Ayşe Nur Demirkaya (</a> <a href="https://www.linkedin.com/in/ay%C5%9Fe-nur-demirkaya-4a438418a/?originalSubdomain=tr">Linkedin</a>)
 
 > General Purpose 
 
