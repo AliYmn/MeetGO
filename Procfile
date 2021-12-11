@@ -1,1 +1,1 @@
-web: gunicorn django4heroku.wsgi
+web: gunicorn MeetGO.wsgi
