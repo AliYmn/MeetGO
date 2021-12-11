@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8qwhag6fmvgd0@y_d7*9%a*wpnvkungsv8_7(m8-7)$j*5=qmd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -80,24 +80,15 @@ WSGI_APPLICATION = 'MeetGO.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': "d31esoa7d7bi3p",
-#         'USER': "islreeoboxaqbq",
-#         'PASSWORD': "1a6d4725386a3960f40b3fbfdb9c16ea4d08332db738204267ffc781fb3ef1de",
-#         'HOST': "postgres://islreeoboxaqbq:1a6d4725386a3960f40b3fbfdb9c16ea4d08332db738204267ffc781fb3ef1de@ec2-18-209-153-180.compute-1.amazonaws.com:5432/d31esoa7d7bi3p",
-#         'PORT':  "5432"
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
 
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
