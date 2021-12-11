@@ -121,14 +121,26 @@
                           <li><a href="#">Behance</a></li>
                         </ul>
                         <b>Address</b> : {{event.address}}<br/>
-                        <b>Participants (4)</b> : ahmet21,thorodias,serkan12,murat12
+                        <b>Participants ({{follow.count}})</b> : 
+                        {% for f in follow %}
+                        <a href="/profile/{{f.user.id}}">{{f.user}}</a>,
+                        {% endfor %}
                         <hr/>
+                        {% if not check %}
                         <div style="float:right; margin:2%;">
                           <div class="main-button-yellow">
-                            <a style="background-color:green;" href="/#">Join Meeting</a>
-                            <a style="background-color:#a36900;" href="/#">Follow Organizer </a>
-                            <a style="background-color:black;" href="/#">Report</a>
+                            {% if not check_follow %}
+                            <a style="background-color:green;" href="/followup/{{event.id}}">Join Meeting</a>
+                            {% else %}
+                            <a style="background-color:green;" href="/unfollow/{{event.id}}">Leave</a>
+                            {% endif %}
+                            {% if not check_sub %}
+                            <a style="background-color:#a36900;" href="/subs/{{event.id}}">Follow Organizer</a>
+                            {% else %}
+                            <a style="background-color:#a36900;" href="/unsubs/{{event.id}}">Unfollow</a>
+                            {% endif %}
                           </div>
+                        {% endif %}
                       </div>
                       </div>
                     </div>
@@ -139,6 +151,7 @@
             <div class="col-lg-12">
               <div class="main-button-red">
                 <a href="/explore/">Back To Meetings List</a>
+                <a style="background-color:green;" href="/profile/{{event.user.id}}">Author Profile Details</a>
               </div>
             </div>
           </div>

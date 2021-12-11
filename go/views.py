@@ -19,8 +19,17 @@ def homePage(request):
 @login_required(login_url='/login/')
 def meetingDetails(request,pk,url):
     event = Events.objects.get(id=pk,url=url)
+    check = Events.objects.filter(id=pk,url=url,user=request.user).exists()
+    follow = Follow.objects.filter(event=event)
+    check_follow = Follow.objects.filter(event=event,user=request.user).exists()
+    profile = Profile.objects.get(user=event.user)
+    check_sub = Subscription.objects.filter(organizer=profile,user=request.user).exists()
     return render(request,'details.html',{
         "event":event,
+        "check":check,
+        "follow":follow,
+        "check_follow":check_follow,
+        "check_sub":check_sub
     })
 
 class exploreMeetings(ListView):
@@ -185,3 +194,66 @@ def profile_details(request,pk):
         "subs":subs,
         "events":events
     })
+
+
+@login_required(login_url='/login/')
+def followup(request,pk):
+    event = Events.objects.filter(id=pk)
+    user = request.user
+    follow = Follow.objects.filter(user=user)
+    # if exists add event
+    if follow.exists():
+        follow_get = Follow.objects.get(user=user)
+        obj = follow_get.event.add(*event)
+
+    # if not exists create object and add event
+    if not follow.exists():
+        Follow.objects.create(
+            user = user
+        )
+        follow_get = Follow.objects.get(user=user)
+        obj = follow_get.event.add(*event)
+
+    get_event = Events.objects.get(id=pk)
+    return redirect("/event/"+str(get_event.pk)+"/"+str(get_event.url)+"/")
+
+
+@login_required(login_url='/login/')
+def unfollow(request,pk):
+    event = Events.objects.get(id=pk)
+    user = request.user
+    follow = Follow.objects.get(user=user,event=event)
+    follow.event.remove(event)
+    return redirect("/event/"+str(event.pk)+"/"+str(event.url)+"/")
+
+
+@login_required(login_url='/login/')
+def subup(request,pk):
+    event = Events.objects.get(id=pk)
+    profile = Profile.objects.filter(user=event.user)
+    user = request.user
+    subs = Subscription.objects.filter(user=user)
+    # if exists add event
+    if subs.exists():
+        subs_get = Subscription.objects.get(user=user)
+        obj = subs_get.organizer.add(*profile)
+
+    # if not exists create object and add event
+    if not subs.exists():
+        Subscription.objects.create(
+            user = user
+        )
+        subs_get = Subscription.objects.get(user=user)
+        obj = subs_get.organizer.add(*profile)
+
+    return redirect("/event/"+str(event.pk)+"/"+str(event.url)+"/")
+
+
+@login_required(login_url='/login/')
+def unsubs(request,pk):
+    event = Events.objects.get(id=pk)
+    profile = Profile.objects.get(user=event.user)
+    user = request.user
+    subs = Subscription.objects.get(user=user)
+    subs.organizer.remove(profile)
+    return redirect("/event/"+str(event.pk)+"/"+str(event.url)+"/")

@@ -112,7 +112,7 @@ class Follow(models.Model):
         super(Follow, self).save(*args, **kwargs)
 
 class Subscription(models.Model):
-    organizer = models.ManyToManyField(Profile)
+    organizer = models.ManyToManyField(Profile,related_name="organizer")
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
