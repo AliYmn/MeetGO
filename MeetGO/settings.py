@@ -80,23 +80,23 @@ WSGI_APPLICATION = 'MeetGO.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "d31esoa7d7bi3p",
-        'USER': "islreeoboxaqbq",
-        'PASSWORD': "1a6d4725386a3960f40b3fbfdb9c16ea4d08332db738204267ffc781fb3ef1de",
-        'HOST': "postgres://islreeoboxaqbq:1a6d4725386a3960f40b3fbfdb9c16ea4d08332db738204267ffc781fb3ef1de@ec2-18-209-153-180.compute-1.amazonaws.com:5432/d31esoa7d7bi3p",
-        'PORT':  "5432"
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': "d31esoa7d7bi3p",
+#         'USER': "islreeoboxaqbq",
+#         'PASSWORD': "1a6d4725386a3960f40b3fbfdb9c16ea4d08332db738204267ffc781fb3ef1de",
+#         'HOST': "postgres://islreeoboxaqbq:1a6d4725386a3960f40b3fbfdb9c16ea4d08332db738204267ffc781fb3ef1de@ec2-18-209-153-180.compute-1.amazonaws.com:5432/d31esoa7d7bi3p",
+#         'PORT':  "5432"
+#     }
+# }
 
 
 # Password validation
