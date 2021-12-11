@@ -12,3 +12,4 @@ six==1.16.0
 sqlparse==0.4.2
 gunicorn
 django-heroku
+whitenoise
