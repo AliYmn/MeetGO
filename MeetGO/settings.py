@@ -87,7 +87,7 @@ DATABASES = {
     }
 }
 
-if not debug:
+if not DEBUG:
     db_from_env = dj_database_url.config(conn_max_age=600)
     DATABASES['default'].update(db_from_env)
 
@@ -166,7 +166,7 @@ COMPRESS_OFFLINE = True
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-if not debug:
+if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     # Activate Django-Heroku.
     django_heroku.settings(locals())
