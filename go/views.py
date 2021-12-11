@@ -15,7 +15,10 @@ def homePage(request):
     category_list = Category.objects.all()
     meetings = Events.objects.all().order_by("-start_time")[:2]
     one_week_ago = datetime.today() - timedelta(days=7)
-    notif_count = Notifications.objects.filter(targetuser=request.user,start_time__gte=one_week_ago).count()
+    if request.user.id:
+        notif_count = Notifications.objects.filter(targetuser=request.user,start_time__gte=one_week_ago).count()
+    else:
+        notif_count = 0
     return render(request,'index.html',{
         "category_list":category_list,
         "meetings":meetings,
