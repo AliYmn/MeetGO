@@ -17,7 +17,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from go.views import homePage,exploreMeetings,meetingDetails,register,loginUser,create,profile,logout_user
+from go.views import homePage,exploreMeetings,meetingDetails,register,loginUser,create,profile,logout_user,profile_details
 from django.views.static import serve
 
 urlpatterns = [
@@ -29,5 +29,6 @@ urlpatterns = [
     path('login/', loginUser),
     path('create/', create),
     path('profile/', profile),
-    path('logout/',logout_user)
+    path('logout/',logout_user),
+    path('profile/<int:pk>',profile_details)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

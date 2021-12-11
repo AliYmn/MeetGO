@@ -66,7 +66,6 @@
                           <li><a  href="/create">Create Event</a></li>
                           <li><a href="/explore">Meetings</a></li>
                           <li class=""><a href="#apply">About Us</a></li>
-                          <li class=""><a href="#courses">Popular Meetings</a></li> 
                           <li class=""><a href="#contact">Contact Us</a></li> 
                           {% if request.user != "AnonymousUser" %}
                           <li class=""><a href="/logout/">Logout</a></li> 
@@ -216,8 +215,8 @@
                   <div class="date">
                     <h6>{{post.start_time | date:"D" }}<span>{{post.start_time | date:"d" }}</span></h6>
                   </div>
-                  <a href="/event/{{post.url}}"><h4>{{post.title}}</h4></a>
-                  <p>{{post.description | truncatechars:20 |safe }}</p>
+                  <a href="/event/{{post.id}}/{{post.url}}/"><h4>{{post.title}}</h4></a>
+                  <p>{{post.description | truncatechars:100 |safe }}</p>
                 </div>
               </div>
             </div>

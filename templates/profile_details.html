@@ -104,7 +104,6 @@
     <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
     <div class="card h-100">
         <div class="card-body">
-            <form action="/profile/" method="post" enctype="multipart/form-data">{% csrf_token %}
             <div class="row gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <h6 class="mb-2 text-primary">Personal Details</h6>
@@ -124,25 +123,7 @@
                 <div style="margin-top:2%"  class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="form-group">
                         <label for="phone">About</label>
-                        <textarea rows="5" type="text" class="form-control" id="about" name="about" placeholder="About">{{about}}</textarea>
-                    </div>
-                </div>
-                
-                <center>
-                <div style="margin-top:3%" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label for="website">Upload Profile</label>
-                        <input type="file" class="form-control" id="file" name="file">
-                    </div>
-                </div>
-                </center>
-            </div>
-            <div class="row gutters">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="text-right">
-                        <br/>
-                        <button type="submit" class="btn btn-primary">Update Profile</button>
-                        </form>
+                        <textarea rows="2" type="text" disabled class="form-control" id="about" name="about" placeholder="About">{{about}}</textarea>
                     </div>
                 </div>
             </div>

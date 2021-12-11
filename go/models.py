@@ -100,3 +100,23 @@ class Events(models.Model):
     def save(self, *args, **kwargs):
         self.url = slugify(self.title.lower(), allow_unicode=False)
         super(Events, self).save(*args, **kwargs)
+
+class Follow(models.Model):
+    event = models.ManyToManyField(Events)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return  self.user.first_name
+
+    def save(self, *args, **kwargs):
+        super(Follow, self).save(*args, **kwargs)
+
+class Subscription(models.Model):
+    organizer = models.ManyToManyField(Profile)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return  self.user.first_name
+
+    def save(self, *args, **kwargs):
+        super(Subscription, self).save(*args, **kwargs)

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import redirect
-from .models import Profile,Category,Events
+from .models import Profile,Category,Events,Follow,Subscription
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 from django.utils.dateparse import parse_datetime
@@ -71,6 +71,13 @@ def register(request):
         new_user.first_name = first_name
         new_user.last_name = last_name
         new_user.save()
+
+        # create profile
+        Profile.objects.create(
+            user = new_user,
+            description = "",
+            url = "",
+        )
 
         return render(request,'register.html',{"success":True})
     return render(request,'register.html')
@@ -147,11 +154,34 @@ def profile(request):
             )
     about = Profile.objects.get(user=request.user).description
     link = Profile.objects.get(user=request.user).url
+    follow = Follow.objects.filter(user=request.user)
+    subs = Subscription.objects.filter(user=request.user)
+    events = Events.objects.filter(user=request.user)
     return render(request,'profile.html',{
         "about":about,
-        "link":link
+        "link":link,
+        "follow":follow,
+        "subs":subs,
+        "events":events
     })
 
 def logout_user(request):
     logout(request)
     return redirect("/")
+
+
+@login_required(login_url='/login/')
+def profile_details(request,pk):
+    user = User.objects.get(pk=pk)
+    about = Profile.objects.get(user=user).description
+    link = Profile.objects.get(user=user).url
+    follow = Follow.objects.filter(user=user)
+    subs = Subscription.objects.filter(user=user)
+    events = Events.objects.filter(user=user)
+    return render(request,'profile_details.html',{
+        "about":about,
+        "link":link,
+        "follow":follow,
+        "subs":subs,
+        "events":events
+    })
