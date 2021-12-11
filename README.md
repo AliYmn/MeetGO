@@ -1,3 +1,7 @@
+> Index Page
+
+<img src="images/homepage.png">
+
 > Demo
 
 We are publish this web site on heroku.
@@ -26,7 +30,4 @@ MeetGO is a social network that facilitates real-life group MeetGOs. The MeetGO 
 * Profile Page
 * Our Event,follow and subscriptions on your profile page.
 
-> Index Page
-
-<img src="images/homepage.png">
 
